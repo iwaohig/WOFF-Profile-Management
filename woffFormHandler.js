@@ -31,6 +31,7 @@ function getProfileAndFillForm() {
     woff.getProfile()
         .then(profile => {
             document.getElementById("displayNameInput").value = profile.displayName;
+            document.getElementById("userIdInput").value = profile.userId;
         })
         .catch(err => {
             console.error("プロファイル情報の取得に失敗しました:", err);
@@ -41,6 +42,7 @@ function submitForm() {
     const formData = {
         date: document.getElementById("dateInput").value,
         displayName: document.getElementById("displayNameInput").value,
+        userId: document.getElementById("userIdInput").value,
         actualVolunteers: document.getElementById("actualVolunteers").value,
         totalVolunteers: document.getElementById("totalVolunteers").value,
         matchingCount: document.getElementById("matchingCount").value,
