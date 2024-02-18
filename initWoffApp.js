@@ -36,8 +36,11 @@ function initializeWoffApp() {
 function getProfileAndFillForm() {
     woff.getProfile()
         .then(profile => {
-            // プロファイル情報を元にフォームを埋める
-            // この例では、displayNameをinputフィールドに設定
+            // ドメインIDをinputフィールドに設定
+            document.getElementById("domainIdInput").value = profile.domainId;
+            // ユーザーIDをinputフィールドに設定
+            document.getElementById("userIdInput").value = profile.userId;
+            // ユーザー名をinputフィールドに設定
             document.getElementById("displayNameInput").value = profile.displayName;
         })
         .catch(err => {
