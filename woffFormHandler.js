@@ -48,7 +48,7 @@ function submitForm() {
         continuationCount: document.getElementById("continuationCount").value
     };
 
-    fetch('https://prod-29.japaneast.logic.azure.com:443/workflows/aaaccedf9ba34275bd6617242c212bf0/triggers/manual/paths/invoke?api-version=2016-06-01', {
+    fetch('https://prod-29.japaneast.logic.azure.com:443/workflows/aaaccedf9ba34275bd6617242c212bf0/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2t-RAIoeztyj2b7Lcsw_WTzCawFgoscpHj2nO9aMqWc', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
