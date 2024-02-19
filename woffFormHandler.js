@@ -20,7 +20,6 @@ function initializeWoffApp() {
                 });
             } else {
                 getProfileAndFillForm();
-                getTokenAndFillForm(); // トークンを取得してフォームに埋め込む
             }
         })
         .catch(err => {
@@ -40,19 +39,13 @@ function getProfileAndFillForm() {
             document.getElementById("displayNameInput").value = profile.displayName;
             document.getElementById("userIdInput").value = profile.userId;
         })
+        .then(() => {
+            // フォームにデータを埋め込んだ後、送信ボタンを有効にする
+            document.getElementById("submitButton").disabled = false;
+        })
         .catch(err => {
             // エラーが発生した場合はログに記録する
             console.error("プロフィール情報の取得に失敗しました:", err);
-        });
-}
-
-function getTokenAndFillForm() {
-    woff.getAccessToken()
-        .then(token => {
-            document.getElementById("tokenInput").value = token;
-        })
-        .catch(err => {
-            console.error("トークンの取得に失敗しました:", err);
         });
 }
 
