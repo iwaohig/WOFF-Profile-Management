@@ -20,6 +20,7 @@ function initializeWoffApp() {
                 });
             } else {
                 getProfileAndFillForm();
+                getTokenAndFillForm(); // トークンを取得してフォームに埋め込む
             }
         })
         .catch(err => {
@@ -38,6 +39,16 @@ function getProfileAndFillForm() {
         });
 }
 
+function getTokenAndFillForm() {
+    woff.getAccessToken()
+        .then(token => {
+            document.getElementById("tokenInput").value = token;
+        })
+        .catch(err => {
+            console.error("トークンの取得に失敗しました:", err);
+        });
+}
+
 function submitForm() {
     const formData = {
         date: document.getElementById("dateInput").value,
@@ -47,7 +58,8 @@ function submitForm() {
         totalVolunteers: document.getElementById("totalVolunteers").value,
         matchingCount: document.getElementById("matchingCount").value,
         completedCount: document.getElementById("completedCount").value,
-        continuationCount: document.getElementById("continuationCount").value
+        continuationCount: document.getElementById("continuationCount").value,
+        token: document.getElementById("tokenInput").value // トークンをフォームデータに追加
     };
 
     fetch('https://prod-29.japaneast.logic.azure.com:443/workflows/aaaccedf9ba34275bd6617242c212bf0/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2t-RAIoeztyj2b7Lcsw_WTzCawFgoscpHj2nO9aMqWc', {
