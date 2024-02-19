@@ -29,13 +29,20 @@ function initializeWoffApp() {
 }
 
 function getProfileAndFillForm() {
-    woff.getProfile()
+    woff.getAccessToken() // トークンを取得する
+        .then(token => {
+            // トークンを取得したら、フォームにデータを埋め込む
+            document.getElementById("tokenInput").value = token; // トークンをhiddenフィールドに設定
+            return woff.getProfile(); // プロフィールを取得する
+        })
         .then(profile => {
+            // プロフィールを取得したら、フォームにデータを埋め込む
             document.getElementById("displayNameInput").value = profile.displayName;
             document.getElementById("userIdInput").value = profile.userId;
         })
         .catch(err => {
-            console.error("プロファイル情報の取得に失敗しました:", err);
+            // エラーが発生した場合はログに記録する
+            console.error("プロフィール情報の取得に失敗しました:", err);
         });
 }
 
